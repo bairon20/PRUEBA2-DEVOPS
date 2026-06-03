@@ -63,18 +63,18 @@ jobs:
       - name: Desplegar en EC2 Backend
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.EC2_BACKEND_IP }} 
+          host: ${{ secrets.EC2_BACKEND_IP }}
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
-          proxy_host: ${{ secrets.EC2_FRONTEND_IP }} 
+          proxy_host: ${{ secrets.EC2_FRONTEND_IP }}
           proxy_username: ec2-user
           proxy_key: ${{ secrets.EC2_SSH_KEY }}
-          # Pasamos la URL dinámica del registry obtenida por la acción oficial de AWS
-          envs: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_SESSION_TOKEN, AWS_REGION, ECR_REGISTRY
-          run: |
-            echo "REGISTRY_URL=${{ steps.login-ecr.outputs.registry }}"
+          envs: AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY,AWS_SESSION_TOKEN,AWS_REGION,ECR_REGISTRY
           script: |
             cd /home/ec2-user/
+            export REGISTRY_URL="${{ steps.login-ecr.outputs.registry }}"
+            echo "Conectado exitosamente. La URL del registry es: $REGISTRY_URL"
+
             
             # 0. Escribir el Docker-compose directamente en la máquina (Backend)
             cat << 'EOF' > Docker-compose.yaml
