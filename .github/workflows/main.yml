@@ -9,13 +9,13 @@ env:
   AWS_REGION: us-east-1
   ECS_CLUSTER: cluster-innovatech-prod     # Tu clúster de ECS
   
-  # Variables del Backend (Sincronizado con image_28a6a8.png)
+  # Variables del Backend (Sincronizado con tus capturas de AWS)
   ECR_REPOSITORY_BACKEND: innovatech-backend
-  ECS_SERVICE_BACKEND: service-innovatech-backend
+  ECS_SERVICE_BACKEND: task-innovatech-backend-service-4sh62mc2
   
-  # Variables del Frontend (Sincronizado con image_28a6a8.png)
+  # Variables del Frontend (Sincronizado con tus capturas de AWS)
   ECR_REPOSITORY_FRONTEND: innovatech-frontend
-  ECS_SERVICE_FRONTEND: service-innovatech-frontend
+  ECS_SERVICE_FRONTEND: task-innovatech-frontend-service-mdjlor0h
 
 jobs:
   build-and-deploy:
